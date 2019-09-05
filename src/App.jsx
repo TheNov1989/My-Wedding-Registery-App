@@ -46,30 +46,7 @@ class App extends Component {
         <CssBaseline />
         <ThemeProvider />
         <div className="app-title">Wedding Gift Registery</div>
-        <div>
-          <TextField
-            placeholder="Search an item..."
-            fullWidth
-            query={this.state.query}
-            onChange={event => {
-              this.setState({ query: event.target.value });
-            }}
-            onKeyPress={event => {
-              if (event.key === "Enter") this.search();
-            }}
-          />
-          <br />
-          <br />
-          <Button
-            color="primary"
-            variant="contained"
-            fullWidth
-            onClick={() => this.search()}
-          >
-            Search &nbsp;
-            <SearchIcon />
-          </Button>
-        </div>
+
         {this.state.pantoneSelection !== null ? (
           <div>
             <PantoneGallery pantones={this.state.pantoneSelection} />
