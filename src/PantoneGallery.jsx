@@ -10,7 +10,7 @@ import Link from "@material-ui/core/Link";
 
 class PantoneGallery extends Component {
   checkItem(id, state) {
-    const baseUrl = `https://localhost:44362/home/UpdateRegistryItem/${id}?purchased=${state}`;
+    const baseUrl = `https://wedding-registery-api20190905101551.azurewebsites.net/home/UpdateRegistryItem/${id}?purchased=${state}`;
 
     fetch(baseUrl, {
       method: "GET"
@@ -36,7 +36,7 @@ class PantoneGallery extends Component {
             {pantones.map((pantone, k) => {
               return (
                 <TableRow key={k}>
-                  <TableCell className="pantone-title text-left">
+                  <TableCell className="pantone-title text-left text-capitalize">
                     {pantone.Title +
                       (pantone.Color === "" ? "" : " (" + pantone.Color + ")")}
                   </TableCell>
