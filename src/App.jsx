@@ -22,20 +22,14 @@ class App extends Component {
       }
     ];
     this.state = { query: "", mainPantone: null, pantoneSelection: null };
+    this.search();
   }
 
   search() {
-    const baseUrl = `https://vumavirtualcp.azurewebsites.net/api/ColorList?key=${this.state.query}`;
+    const baseUrl = `https://wedding-registery-api20190905101551.azurewebsites.net/home/GetRegistryItems?q=${this.state.query}`;
 
     console.log(baseUrl);
 
-    this.setState({
-      pantoneSelection: this.gifts.filter(x =>
-        x.item.toLowerCase().indexOf(this.state.query.toLowerCase() > -1)
-      )
-    });
-
-    /*
     fetch(baseUrl, {
       method: "GET"
     })
@@ -44,7 +38,6 @@ class App extends Component {
         const pantone = json[0];
         this.setState({ mainPantone: pantone, pantoneSelection: json });
       });
-      */
   }
 
   render() {
@@ -55,7 +48,7 @@ class App extends Component {
         <div className="app-title">Wedding Gift Registery</div>
         <div>
           <TextField
-            placeholder="Search an artist..."
+            placeholder="Search an item..."
             fullWidth
             query={this.state.query}
             onChange={event => {
@@ -65,7 +58,8 @@ class App extends Component {
               if (event.key === "Enter") this.search();
             }}
           />
-          &nbsp; &nbsp;
+          <br />
+          <br />
           <Button
             color="primary"
             variant="contained"

@@ -6,8 +6,19 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import Link from "@material-ui/core/Link";
 
 class PantoneGallery extends Component {
+  checkItem(id, state) {
+    const baseUrl = `https://localhost:44362/home/UpdateRegistryItem/${id}?purchased=${state}`;
+
+    fetch(baseUrl, {
+      method: "GET"
+    }).then(response => {
+      console.log("Call complete");
+    });
+  }
+
   render() {
     console.log("Gallery props", this.props);
     const { pantones } = this.props;
@@ -18,7 +29,7 @@ class PantoneGallery extends Component {
         <Table>
           <TableHead>
             <TableCell align="left">Item</TableCell>
-            <TableCell align="center">Link</TableCell>
+            <TableCell align="center"></TableCell>
             <TableCell align="center">Purchased</TableCell>
           </TableHead>
           <TableBody>
@@ -26,19 +37,33 @@ class PantoneGallery extends Component {
               return (
                 <TableRow key={k}>
                   <TableCell className="pantone-title text-left">
-                    {pantone.item}
+                    {pantone.Title +
+                      (pantone.Color === "" ? "" : " (" + pantone.Color + ")")}
                   </TableCell>
                   <TableCell align="center" className="pantone-title">
-                    <a
-                      href={pantone.Link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      link
-                    </a>
+                    {pantone.Url !== "" ? (
+                      <div>
+                        <Link
+                          href={pantone.Url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          link
+                        </Link>
+                      </div>
+                    ) : (
+                      <div></div>
+                    )}
                   </TableCell>
                   <TableCell align="center" className="pantone-title">
-                    <Checkbox />
+                    <Checkbox
+                      key={pantone.itemID}
+                      onChange={event => {
+                        pantone.Purchased = event.target.checked;
+                        this.checkItem(pantone.ItemID, event.target.checked);
+                      }}
+                      defaultChecked={pantone.Purchased}
+                    />
                   </TableCell>
                 </TableRow>
               );

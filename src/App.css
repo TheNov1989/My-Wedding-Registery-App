@@ -30,3 +30,7 @@
 .text-left {
   text-align: left;
 }
+
+.text-capitalize {
+  text-transform: capitalize;
+}
