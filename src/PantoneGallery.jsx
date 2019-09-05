@@ -22,6 +22,17 @@ class PantoneGallery extends Component {
   render() {
     console.log("Gallery props", this.props);
     const { pantones } = this.props;
+
+    if (pantones.length === 0)
+      return (
+        <div>
+          {" "}
+          <br />
+          <br />
+          No items found
+        </div>
+      );
+
     return (
       <div>
         <br />
